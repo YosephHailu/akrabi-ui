@@ -6,8 +6,12 @@
           class="relative w-full bg-indigo-500 flex flex-wrap items-center justify-between py-6 text-gray-50 border-b-2 navbar navbar-expand-lg navbar-light">
           <div class="container-fluid w-full flex flex-wrap items-center justify-between pr-6 pl-1">
             
-            <div class="collapse navbar-collapse flex-grow items-center ml-8" id="navbarSupportedContent1">
-              <a class="text-white pr-2 font-semibold uppercase" href="#">Akrabia.com</a>
+            <div class="collapse navbar-collapse flex-grow items-center ml-8 flex" id="navbarSupportedContent1">
+              <nuxt-link to="/" class="text-white pr-2 font-semibold uppercase" href="#">Akrabia.com</nuxt-link>
+              <div class="ml-12">
+                <nuxt-link to="provider" class="text-lg py-2 px-4 uppercase font-normal whitespace-nowrap bg-gray-300 text-gray-700 hover:bg-gray-100"
+                  >Provider</nuxt-link>
+              </div>
             </div>
             <!-- Collapsible wrapper -->
   
