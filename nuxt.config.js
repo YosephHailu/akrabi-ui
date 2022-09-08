@@ -35,6 +35,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
+    '@nuxtjs/apollo',
     '@nuxtjs/axios',
     ['nuxt-gmaps', {
       key: 'AIzaSyAQmgqQUZPz-119aef1Hr8ox9Kv68kWE1E',
@@ -43,6 +44,15 @@ export default {
     
   ],
 
+  // Apollo configuration
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://akebabi.com/graphql',
+      },
+    },
+  },
+  
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
