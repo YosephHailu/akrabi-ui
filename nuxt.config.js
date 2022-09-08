@@ -48,7 +48,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://akebabi.com/graphql',
+        httpEndpoint: 'http://akrabia.oddatech.com/graphql',
       },
     },
   },

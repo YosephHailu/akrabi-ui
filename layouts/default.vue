@@ -3,7 +3,7 @@
   
       <div class="w-full">
         <nav
-          class="relative w-full bg-indigo-500 flex flex-wrap items-center justify-between py-6 text-gray-50 border-b-2 navbar navbar-expand-lg navbar-light">
+          class="relative shadow-lg w-full bg-indigo-500 flex flex-wrap items-center justify-between py-6 text-gray-50 border-b-2 navbar navbar-expand-lg navbar-light">
           <div class="container-fluid w-full flex flex-wrap items-center justify-between pr-6 pl-1">
             
             <div class="collapse navbar-collapse flex-grow items-center ml-8 flex" id="navbarSupportedContent1">
