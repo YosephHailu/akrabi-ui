@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-blue-50 flex">
+    <div class="bg-gray-50 flex">
   
       <div class="w-full">
         <nav
@@ -18,6 +18,10 @@
             <!-- Right elements -->
             <div class="flex flex-wrap items-center relative">
               <!-- Icon -->
+              <nuxt-link to="/dashboard" class="bg-gray-50 opacity-90 mx-2 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-4 border border-gray-500 hover:border-transparent rounded">
+                Dashboard
+              </nuxt-link>
+
               <button class="text-black hover:opacity-80 focus:opacity-80 mr-4">
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shopping-cart" class="w-4"
                   role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -27,7 +31,7 @@
                 </svg>
               </button>
               <div class="dropdown relative">
-                <a class="text-black opacity-60 hover:opacity-80 focus:opacity-80 mr-4 dropdown-toggle hidden-arrow flex items-center"
+                <a @click="showNotificationAction = !showNotificationAction" class="text-black opacity-60 hover:opacity-80 focus:opacity-80 mr-4 dropdown-toggle hidden-arrow flex items-center"
                   href="#" id="dropdownMenuButton1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell" class="w-4" role="img"
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -38,7 +42,8 @@
                   <span class="text-white bg-red-700 absolute rounded-full text-xs -mt-2.5 ml-2 py-0 px-1.5">1</span>
                 </a>
                 <ul
-                  class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0"
+                  v-show="showNotificationAction"
+                  class="dropdown-menu min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none left-auto right-0"
                   aria-labelledby="dropdownMenuButton1">
                   <li>
                     <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
@@ -54,14 +59,15 @@
                   </li>
                 </ul>
               </div>
-              <div class="dropdown relative">
-                <a class="dropdown-toggle flex items-center hidden-arrow" href="#" id="dropdownMenuButton2" role="button"
+              <div class="dropdown relative" v-if="$auth.loggedIn">
+                <a class="dropdown-toggle flex items-center hidden-arrow" @click="showProfileAction = !showProfileAction" href="#" id="dropdownMenuButton2" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="https://mdbootstrap.com/img/new/avatars/2.jpg" class="rounded-full"
-                    style="height: 25px; width: 25px" alt="" loading="lazy" />
+                    style="height: 50px; width: 50px" alt="" loading="lazy" />
                 </a>
                 <ul
-                  class="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 hidden m-0 bg-clip-padding border-none left-auto right-0"
+                  v-show="showProfileAction"
+                  class="dropdown-menu min-w-max absolute bg-white text-base z-50 float-left py-2 list-none text-left rounded-lg shadow-lg mt-1 m-0 bg-clip-padding border-none left-auto right-0"
                   aria-labelledby="dropdownMenuButton2">
                   <li>
                     <a class="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100"
@@ -99,6 +105,8 @@ import Notification from '~/components/Notification.vue';
   components: { Notification },
       data() {
           return {
+            showProfileAction: false,
+            showNotificationAction: false,
           };
       },
   };

@@ -58,7 +58,7 @@ export default class GraphQLScheme extends LocalScheme {
         return data.login
       })
 
-    //   this.token.set(response.access_token)
+      this.token.set(response.access_token)
 
     // Set your graphql-token
     await $apolloHelpers.onLogin(response.access_token)
@@ -67,7 +67,6 @@ export default class GraphQLScheme extends LocalScheme {
     await this.fetchUser()
 
     const hasToken = !!$apolloHelpers.getToken()
-    console.log(hasToken)
     // Update tokens
     return response.access_token
   }
@@ -90,8 +89,7 @@ export default class GraphQLScheme extends LocalScheme {
           return Promise.reject(error)
         }
 
-        console.log(data);
-        // this.$auth.setUser(data.me)
+        this.$auth.setUser(data.me)
 
         return data.me
       })

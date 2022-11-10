@@ -144,7 +144,7 @@ export default {
       });
 
       let marker = new this.$refs.gMap.google.maps.Marker({
-        position: preference.provider.location,
+        position: {lat: Number.parseFloat(preference.provider.location.lat), lng: Number.parseFloat(preference.provider.location.lng)},
         options: {icon: preference.jobCategory.icon_image},
         title: preference.jobCategory.name,
       });

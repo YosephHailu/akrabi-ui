@@ -42,7 +42,7 @@ import { LOGIN_MUTATION } from '~/schema/Provider';
     data() {
       return {
         credential: {
-          username: "admin@mail.com",
+          username: "me@mail.com",
           password: "password",
         },
       }
@@ -58,7 +58,6 @@ import { LOGIN_MUTATION } from '~/schema/Provider';
           this.loginBtnLoading = true;
           this.$auth.loginWith("graphql", this.credential)
               .then(result => {
-                console.log('lll', result);
               this.loginBtnLoading = false;
               this.successNotification("Authenticated Successfully!");
               this.$router.push('/')
@@ -67,6 +66,9 @@ import { LOGIN_MUTATION } from '~/schema/Provider';
               this.loginBtnLoading = false;
               this.errorNotification("Authentication Failed!");
           });
+
+      console.log('this.$auth.loggedIn', this.$auth.loggedIn)
+
       }
     },
     
