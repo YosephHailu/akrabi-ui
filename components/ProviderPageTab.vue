@@ -20,17 +20,18 @@
       </ul>
   </div>
   
-  <ProviderForm v-if="tab == 'register'" />
+  <ProviderRegistrationForm v-if="tab == 'register'" :selectedLocation="selectedLocation" @show-login-form="onLoginClick" />
   <ProviderLoginForm v-if="tab == 'login'" />
 </div>
 </template>
 
 <script>
-import ProviderForm from './ProviderForm.vue';
+import ProviderRegistrationForm from './ProviderRegistrationForm.vue';
 import ProviderLoginForm from './ProviderLoginForm.vue';
 export default {
     name: "NuxtTutorial",
-    components: { ProviderForm, ProviderLoginForm },
+    props: ["selectedLocation"],
+    components: { ProviderRegistrationForm, ProviderLoginForm },
     data() {
         return {
             tab: "register",
@@ -51,7 +52,7 @@ export default {
     },
     methods: {
         onLoginClick() {
-            console.log(this.tab);
+            console.log(this.tab, 'tab');
             this.tab = "login"
         },
         onRegisterClick() {

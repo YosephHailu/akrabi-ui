@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <ProviderPageTab />
+    <ProviderPageTab :selectedLocation="selectedLocation" />
 
     <GMap
       ref="gMap"
@@ -17,8 +17,10 @@
 
 <script>
 import { mapStyle } from '../../common/mapStyle'
+import ProviderPageTab from '../../components/ProviderPageTab.vue'
 export default {
   name: 'IndexPage',
+  components: { ProviderPageTab },
   data() {
     return {
       marker: null,
@@ -30,6 +32,7 @@ export default {
         lat: 8.9806,
         lng: 38.7578,
       },
+      selectedLocation: null,
       mapStyle: mapStyle,
       clusterStyle: [
         {
@@ -53,6 +56,7 @@ export default {
         map.setMap(null);
       })
       event.map.markers.push(marker);
+      this.selectedLocation = this.location;
     },
     findCurrentLocation() {
       if (navigator.geolocation) {

@@ -85,14 +85,18 @@
         <div class="">
           <nuxt />
         </div>
+
+        <notification />
       </div>
   
     </div>
   </template>
   
   <script>
+import Notification from '~/components/Notification.vue';
   
   export default {
+  components: { Notification },
       data() {
           return {
           };
