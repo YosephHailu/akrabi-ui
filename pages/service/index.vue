@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <ProviderForm :selectedLocation="selectedLocation" />
+    <ProviderPageTab :selectedLocation="selectedLocation" />
 
     <GMap
       ref="gMap"
@@ -17,10 +17,10 @@
 
 <script>
 import { mapStyle } from '../../common/mapStyle'
-import ProviderForm from '../../components/ProviderForm.vue'
+import ProviderPageTab from '../../components/ProviderPageTab.vue'
 export default {
   name: 'IndexPage',
-  components: { ProviderForm },
+  components: { ProviderPageTab },
   data() {
     return {
       marker: null,
@@ -50,7 +50,7 @@ export default {
       let marker = new this.$refs.gMap.google.maps.Marker({
         position: this.location,
         map: event.map,
-        options: {icon: "/current_location.gif"}
+        options: {icon: "current_location.gif"}
       });
       event.map.markers.forEach((map) => {
         map.setMap(null);
@@ -67,8 +67,8 @@ export default {
               lng: position.coords.longitude,
             };
 
+            console.log(this.$refs.gMap)
             this.location = pos;
-
             let marker = new this.$refs.gMap.google.maps.Marker({
               position: this.location,
               map: this.$refs.gMap.map,
@@ -76,8 +76,9 @@ export default {
             });
 
             this.$refs.gMap.map.markers.push(marker);
-          }, () => {
-            
+
+          },
+          () => {
           }
         );
       } else {

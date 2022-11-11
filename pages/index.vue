@@ -80,6 +80,7 @@ export default {
       }
     },
     addMarker(map, preference) {
+      console.log(preference.user.user_image)
       const contentString = `
         <div class="container max-w-sm bg-white rounded dark:bg-gray-800 shadow-lg transform duration-200 easy-in-out m-12">
             <div class="h-1/4 sm:h-40 overflow-hidden"> 
@@ -87,14 +88,14 @@ export default {
             </div>
             <div class="flex justify-start px-5 -mt-12 mb-5">
               <span clspanss="block relative h-32 w-32">
-                <img alt="Photo by aldi sigun on Unsplash" src="${preference.provider.provider_image}" class="mx-auto object-cover rounded-full h-24 w-24 bg-white p-1">
+                <img alt="Photo by aldi sigun on Unsplash" src="${preference.user.user_image}" class="mx-auto object-cover rounded-full h-24 w-24 bg-white p-1">
               </span>
             </div>
             <div class="">
               <div class="px-7">
                 <h2 class="text-3xl font-bold text-green-800 dark:text-gray-300">${ preference.jobCategory.name }</h2>
-                <p class="text-gray-400 text-xl uppercase dark:text-gray-400">${ preference.provider.name }</p>
-                <p class="mt-2 text-gray-600 dark:text-gray-300">${ preference.provider.description }</p>
+                <p class="text-gray-400 text-xl uppercase dark:text-gray-400">${ preference.user.name }</p>
+                <p class="mt-2 text-gray-600 dark:text-gray-300">${ preference.user.description }</p>
 
                 <div class="mt-4">
                   <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">
@@ -105,14 +106,15 @@ export default {
                         active:bg-green-800 transition
                         duration-150 ease-in-out"> $150 Birr
                     </button>
-                    <button
+                    <a
                       class="px-6 py-2.5
                         bg-green-900 text-white
                         font-medium text-xs
                         leading-tight uppercase
                         hover:bg-green-700 focus:bg-green-700 focus:outline-none focus:ring-0
                         active:bg-green-800 transition
-                        duration-150 ease-in-out">
+                        duration-150 ease-in-out"
+                        href="/provider/${ preference.id }">
                         Hire now
                     </a>
                   </div>
@@ -144,7 +146,7 @@ export default {
       });
 
       let marker = new this.$refs.gMap.google.maps.Marker({
-        position: {lat: Number.parseFloat(preference.provider.location.lat), lng: Number.parseFloat(preference.provider.location.lng)},
+        position: {lat: Number.parseFloat(preference.user.current_location.lat), lng: Number.parseFloat(preference.user.current_location.lng)},
         options: {icon: preference.jobCategory.icon_image},
         title: preference.jobCategory.name,
       });

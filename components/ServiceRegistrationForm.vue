@@ -15,18 +15,6 @@
     <form class="" @submit.prevent="register">
       <div class="bg-white shadow-md rounded pt-6 pb-8 mb-4 px-8">
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-            Name
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            v-model="provider.name"
-            id="name"
-            type="text"
-            placeholder="Select name"
-          />
-        </div>
-        <div class="mb-4">
           <label
             class="block text-gray-700 text-sm font-bold mb-2"
             for="job category">
@@ -34,7 +22,7 @@
           </label>
           <select
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            v-model="provider.job_category_id"
+            v-model="jobPreference.job_category_id"
             id="job_category"
             type="text"
             placeholder="job category">
@@ -57,7 +45,7 @@
             Employment type
           </label>
           <select
-            v-model="provider.employment_type"
+            v-model="jobPreference.employment_type"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="employment_type"
             type="text"
@@ -77,7 +65,7 @@
           </label>
           <input
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            v-model="provider.amount"
+            v-model="jobPreference.amount"
             id="amount"
             type="number"
             autocomplete="off"
@@ -86,32 +74,6 @@
           />
         </div>
 
-        <div class="form-group mb-6">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="Address">
-            Photo
-          </label>
-          <input
-            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            type="file" id="formFileMultiple" multiple @change="onFileChange" />
-        </div>
-
-        <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="Address">
-            Address
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            :value="displayProviderLocation"
-            id="Address"
-            type="text"
-            autocomplete="off"
-            placeholder="Select on map"
-          />
-        </div>
       </div>
       <div class="px-6 py-4">
         <div class="font-bold text-xl mb-2">Join our talent</div>
@@ -133,13 +95,13 @@
 <script>
 import { mapActions } from 'vuex'
 import { JOB_CATEGORY_QUERY } from '~/schema/JobCategory'
-import { REGISTER_PROVIDER_MUTATION } from '~/schema/Provider'
+import { REGISTER_JOB_PREFERENCE_MUTATION } from '~/schema/JobPreference'
 export default {
   name: 'ProviderForm',
   props: ['selectedLocation'],
   data() {
     return {
-      provider: {
+      jobPreference: {
         job_category_id: '',
         employment_type: '',
       },
@@ -170,15 +132,16 @@ export default {
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length)
         return;
-      this.provider.image = files[0];
+      this.jobPreference.image = files[0];
     },
 
     register() {
-      console.log(this.provider)
+      console.log(this.jobPreference)
+      this.jobPreference.amount = parseFloat(this.jobPreference.amount);
       this.$apollo
         .mutate({
-          mutation: REGISTER_PROVIDER_MUTATION,
-          variables: this.provider,
+          mutation: REGISTER_JOB_PREFERENCE_MUTATION,
+          variables: this.jobPreference,
         })
         .then(({ data }) => {
           console.log(data)
@@ -193,8 +156,8 @@ export default {
 
   watch: {
     selectedLocation(newValue) {
-      this.provider.lat = newValue.lat();
-      this.provider.lng = newValue.lng();
+      this.jobPreference.lat = newValue.lat();
+      this.jobPreference.lng = newValue.lng();
       console.log(newValue.lat())
     },
   },
