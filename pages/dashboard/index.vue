@@ -2,7 +2,7 @@
     <div class="lg:w-8/12 xl:w-11/12 mx-auto py-5">
       <div class="flex flex-wrap -mx-3">
         <div class="w-full max-w-full px-3 sm:flex-0 shrink-0 sm:w-6/12 lg:w-1/4 2xl:w-1/5">
-          <nuxt-link to="/provider/create">
+          <nuxt-link to="/service/create">
             <div
                 class="border-black/12.5 shadow hover:shadow-xl hover:bg-gray-200 relative flex h-full min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
                 <div class="flex-auto p-6">
